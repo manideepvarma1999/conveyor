@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conveyor</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Conveyor</h1>
+    <span id="status" aria-live="polite"></span>
+    <button id="signout" type="button" hidden>Forget key</button>
+  </header>
+
+  <main>
+    <form id="login" class="card" autocomplete="off">
+      <h2>Connect</h2>
+      <p>Paste an API key with the <code>admin</code> scope. It is kept only in this tab's session storage.</p>
+      <label for="key">API key</label>
+      <input id="key" type="password" required pattern="cvk_[A-Za-z0-9_\-]{43}" spellcheck="false">
+      <button type="submit">Connect</button>
+      <p id="login-error" class="error" role="alert"></p>
+    </form>
+
+    <section id="app" hidden>
+      <div class="card">
+        <h2>Queues</h2>
+        <table>
+          <thead>
+            <tr><th>Queue</th><th>Queued</th><th>Running</th><th>Succeeded</th><th>Dead</th><th>Cancelled</th><th>Oldest waiting</th></tr>
+          </thead>
+          <tbody id="queues"></tbody>
+        </table>
+        <p id="empty" class="muted" hidden>No jobs yet.</p>
+      </div>
+
+      <div class="card">
+        <h2>Dead letters</h2>
+        <p class="muted">Jobs that used all their attempts or failed permanently. Retrying resets their attempts.</p>
+        <table>
+          <thead><tr><th>ID</th><th>Queue</th><th>Kind</th><th>Attempts</th><th>Last error</th><th></th></tr></thead>
+          <tbody id="dead"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

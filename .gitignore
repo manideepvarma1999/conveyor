@@ -1,0 +1,5 @@
+.env
+*.exe
+/conveyor
+/dist/
+coverage.out
